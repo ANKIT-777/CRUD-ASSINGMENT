@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Management System</title>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+  <div class="container">
+    <h1>Student Management System</h1>
+    <div id="studentsContainer">
+      <h2>Students</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="studentsTableBody">
+        </tbody>
+      </table>
+    </div>
+
+    <div id="addStudentContainer">
+      <h2>Add Student</h2>
+      <form id="addStudentForm">
+        <div class="form-group">
+          <label for="nameInput">Name:</label>
+          <input type="text" class="form-control" id="nameInput" required>
+        </div>
+        <div class="form-group">
+          <label for="ageInput">Age:</label>
+          <input type="number" class="form-control" id="ageInput" required>
+        </div>
+        <div class="form-group">
+          <label for="gradeInput">Grade:</label>
+          <input type="text" class="form-control" id="gradeInput" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Student</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Function to fetch all students from the API
+      function fetchStudents() {
+        $.ajax({
+          url: '/students',
+          type: 'GET',
+          success: function(data) {
+            var students = data.students;
+            var tableBody = $('#studentsTableBody');
+            tableBody.empty();
+
+            students.forEach(function(student) {
+              var row = $('<tr>');
+              row.append($('<td>').text(student.name));
+              row.append($('<td>').text(student.age));
+              row.append($('<td>').text(student.grade));
+              tableBody.append(row);
+            });
+          }
+        });
+      }
+
+      // Fetch all students on page load
+      fetchStudents();
+
+      // Event listener for adding a new student
+      $('#addStudentForm').submit(function(event) {
+        event.preventDefault();
+
+        var name = $('#nameInput').val();
+        var age = $('#ageInput').val();
+        var grade = $('#gradeInput').val();
+
+        var student = {
+          name: name,
+          age: age,
+          grade: grade
+        };
+
+        $.ajax({
+          url: '/students',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(student),
+          success: function(data) {
+            // Clear the form inputs
+            $('#nameInput').val('');
+            $('#ageInput').val('');
+            $('#gradeInput').val('');
+
+            // Fetch all students again to update the table
+            fetchStudents();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
