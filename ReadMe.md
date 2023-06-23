@@ -14,7 +14,7 @@ To run this project, you need to have the following software installed on your m
 
 1. Clone the repository:
 
-git clone https://github.com/ANKIT-777/assingment-node-21
+git clone https://github.com/ANKIT-777/CRUD-ASSINGMENT.git
 
 
 2. Navigate to the project directory:
