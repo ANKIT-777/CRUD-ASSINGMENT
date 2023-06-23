@@ -36,10 +36,10 @@ npm install
    - Add the following line to the `.env` file:
 
      ```
-     DB_URL=mongodb+srv://students:ankit111@cluster0.2dhvrzw.mongodb.net/?retryWrites=true&w=majority
+     DB_URL=mongodb+srv://username:password@cluster0.2dhvrzw.mongodb.net/?retryWrites=true&w=majority
      ```
 
-     Replace `<mongodb+srv://students:ankit111@cluster0.2dhvrzw.mongodb.net/?retryWrites=true&w=majority>` with the connection URL for your MongoDB database.
+     Replace `<mongodb+srv://username:password@cluster0.2dhvrzw.mongodb.net/?retryWrites=true&w=majority>` with the connection URL for your MongoDB database.
 
 6. Start the server:
 
