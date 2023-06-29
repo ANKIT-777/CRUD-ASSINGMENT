@@ -38,16 +38,24 @@ app.get('/students/:id', (req, res) => {
 // Create a new student
 app.post('/students', (req, res) => {
   const { name, age, grade } = req.body;
+
+  // Input validation
+  if (!name || !age || !grade) {
+    return res.status(400).json({ error: 'Name, age, and grade are required fields' });
+  }
+
   const student = new Student({ name, age, grade });
   student.save()
     .then((savedStudent) => {
-      res.json(savedStudent);
+      res.status(201).json(savedStudent); // Use 201 Created status code for successful creation
     })
     .catch((error) => {
+      // Error handling
       console.error('Error creating student:', error);
       res.status(500).json({ error: 'Failed to create student' });
     });
 });
+
 
 // Update an existing student
 app.put('/students/:id', (req, res) => {

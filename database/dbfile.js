@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // MongoDB connection URL from .env file
-const url = process.env.DB_URL;
+const url = process.env.DB_LINK;
 
 // Database Name
 const dbName = 'mydatabase';
